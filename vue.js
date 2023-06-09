@@ -19,7 +19,18 @@ class Vue {
       if (child.nodeType === 1) {
         // 元素节点
         console.log('元素节点', child);
-        this.compile(child)
+
+        // const attributes = child.attributes; // 获取元素节点的属性
+        if (child.hasAttribute('@click')) {
+          console.log('click', child.getAttribute('@click'));
+          child.addEventListener('click', this.$methods[child.getAttribute('@click').trim()].bind(this.$data))
+        }
+
+        // 递归编译子节点
+        if (child.childNodes.length > 0) {
+          this.compile(child)
+        }
+
         // this.compileElement(child);
       } else if (child.nodeType === 3) {
         // 文本节点
@@ -29,8 +40,14 @@ class Vue {
     })
   }
 
+  /**
+   * 
+   * @param {*} node 
+   * @description 编译元素节点
+   * @example <div v-text="message"></div>
+   */
   compileElement (node) {
-    const attributes = node.attributes;
+    const attributes = node.attributes; // 获取元素节点的属性
     [...attributes].forEach(attr => {
       const { name, value } = attr;
       if (name.startsWith('v-')) {
@@ -41,6 +58,13 @@ class Vue {
     })
   }
 
+
+  /**
+   * 
+   * @param {*} node 
+   * @description 编译文本节点
+   * @example <div>{{ message }}</div>
+   */
   compileText (node) {
     const content = node.textContent; // 获取文本节点的内容
     const reg = /\{\{(.+?)\}\}/g;
@@ -51,10 +75,8 @@ class Vue {
         return this.$data[placeholder.trim()];
       })
     }
-
     // if (/\{\{(.+?)\}\}/.test(content)) {
     //   CompileUtil['text'](node, content, this);// {{a}} {{b}}
     // }
-
   }
 }
