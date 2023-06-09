@@ -7,7 +7,19 @@
     <title>vue源码分析</title>
   </head>
   <body>
-    <div id="app"></div>
-    <script></script>
+    <div id="app">
+      {{ message }}
+      <h1>{{message}}</h1>
+      {{ message }}
+    </div>
+    <script type="text/javascript" src="vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          message: "hello world",
+        },
+      });
+    </script>
   </body>
 </html>
