@@ -4,9 +4,27 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack",
+    "serve": "webpack serve --port 8083 --open",
+    "watch": "webpack --watch"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "Shucei <1003823477@qq.com>",
+  "license": "ISC",
+  "repository": "https://github.com/Shucei/min-vue.git",
+  "devDependencies": {
+    "@babel/core": "^7.22.5",
+    "@babel/preset-env": "^7.22.5",
+    "babel-loader": "^9.1.2",
+    "copy-webpack-plugin": "^11.0.0",
+    "happypack": "^5.0.1",
+    "html-webpack-plugin": "^5.5.3",
+    "mini-css-extract-plugin": "^2.7.6",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  },
+  "dependencies": {
+    "clean-webpack-plugin": "^4.0.0",
+    "webpack": "^5.87.0"
+  }
 }
